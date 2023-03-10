@@ -3,7 +3,7 @@ import { signIn, signOut } from "next-auth/react"
 
 
 function LoginForm() {
-    const onSubmit = (e) => {
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         fetch("/api/user/login", {
             headers: {
