@@ -33,7 +33,7 @@ export default function ChatInput({ chatId }: Props) {
         }
         await addDoc(collection(db,'users', session?.user?.email!, 'chats', chatId, 'messages'),message)
 
-        const notification = toast.loading("thinking")
+        const notification = toast.loading("思考中...")
 
         await fetch('/api/askQuestion', {
             method:'POST',
@@ -45,7 +45,7 @@ export default function ChatInput({ chatId }: Props) {
             })
         }).then(()=>{
             // Toast notification
-            toast.success('ChatGPT has responded!', {
+            toast.success('问题已回答', {
                 id:notification,
             })
         })
