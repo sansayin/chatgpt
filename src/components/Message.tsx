@@ -14,21 +14,13 @@ function ChatGPTIcon() {
 }
 function Message({ message }: Props) {
     const isChatGPT = message.user.name === "ChatGPT"
+    console.log(message.user.avatar)
+    const avatar = message.user.avatar || "/ChatGPT_logo.svg"
     return (
         <div className={`py-5 text-white ${isChatGPT && "bg-[#434654]"}`}>
             <div className="flex space-x-5  max-w-2xl mx-4">
-                {!isChatGPT && (
-                    <>
-                        <img src={message.user.avatar} className="h-8 w-8"></img>
-                        <p className="flex-1 pt-1 text-sm">{message.text}</p>
-                    </>
-                )}
-                {isChatGPT && (
-                    <>
-                        <ChatGPTIcon/>
-                        <p className="flex-1 pt-1 text-sm">{message.text}</p>
-                    </>
-                )}
+                    <img src={avatar} className="h-8 w-8"></img>
+                    <p className="flex-1 pt-1 text-sm">{message.text}</p>
             </div>
         </div>
 
