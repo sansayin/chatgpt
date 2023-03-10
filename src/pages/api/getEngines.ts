@@ -1,7 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from "next"
-import queryAi from "../../lib/queryApi"
-import admin from "firebase-admin"
-import { adminDb } from "~/firebase-admin";
 import openai from "~/lib/chatgpt";
 
 type Option = {

@@ -12,8 +12,9 @@ export default async function handler(
     res: NextApiResponse<Data>
 ) {
     const { prompt, chatId, model, session } = req.body;
+    console.log(session.user)
     if (!prompt) {
-        res.status(400).json({ answer: "Prompt is empty" })
+        res.status(400).json({ answer: "Prompt is empty" }) 
         return;
     }
     if (!chatId) {
@@ -30,7 +31,6 @@ export default async function handler(
             avatar: ""
         },
     };
-    console.log(session)
     await adminDb
         .collection("users")
         .doc(session.user.email)

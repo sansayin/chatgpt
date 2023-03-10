@@ -7,6 +7,7 @@ import { collection, query, orderBy } from 'firebase/firestore';
 import { db } from '../firebase'
 import ChatRow from './ChatRow';
 import ModelSelection from './ModelSelection';
+
 function Sidebar() {
     const { data: session } = useSession();
     const [chats, loading, error] = useCollection(
@@ -36,7 +37,7 @@ function Sidebar() {
             </div>
             {session && (
                 <img onClick={() => signOut()}
-                    src={session?.user.image!}
+                    src={session?.user?.image!}
                     alt=""
                     className="h-12 w-12 rounded-full cursor-pointer mx-auto mb-2 hover:opacity-50"
                 />

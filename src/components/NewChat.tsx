@@ -13,7 +13,7 @@ function NewChat() {
             collection(db, "users", session?.user?.email!, 'chats'),
             {
                 messages:[],
-                userId:session?.user.email,
+                userId:session?.user?.email,
                 createAt:serverTimestamp()
             }
         );

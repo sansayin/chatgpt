@@ -2,7 +2,6 @@ import "../styles/globals.css";
 import Sidebar from "../components/Sidebar";
 import SessionProvider from "../components/SessionProvider";
 import { getServerSession } from "next-auth";
-import { authOptions } from "~/server/auth";
 import Login from "~/components/Login";
 import ClientProvider from "~/components/ClientProvider";
 export const metadata = {
@@ -15,7 +14,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const session = await getServerSession(authOptions)
+  const session = await getServerSession()
   return (
     <html lang="en">
       <body>
