@@ -35,7 +35,7 @@ function ChatRow({ id }: Props) {
         <Link href={`/chat/${id}`} className={`chatRow justify-center border`}>
             <ChatBubbleLeftIcon className="flex-shrink-0 h-5 w-5" />
             <p className="grow hidden md:inline-flex truncate justify-center">
-                {messages?.docs[messages.docs.length-1]?.data().text || "New Chat"}
+                {messages?.docs[messages.docs.length-1]?.data().text || "开始对话"}
             </p>
             <TrashIcon onClick={removeChat} className="flex-shrink-0 h-5 w-5 text-gray-700 hover:text-red-700" />
         </Link>
