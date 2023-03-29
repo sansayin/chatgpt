@@ -1,19 +1,19 @@
 import { getApp, getApps ,initializeApp} from "firebase/app";
 import { getFirestore } from 'firebase/firestore'
-
+import { getAuth } from "firebase/auth";
 const firebaseConfig = {
 
-    apiKey: "AIzaSyBACNpc5CcLRsaao9uSBQHsaHlOLWE9fLI",
-  
-    authDomain: "chatgpt-messenger-8c5d7.firebaseapp.com",
-  
-    projectId: "chatgpt-messenger-8c5d7",
-  
-    storageBucket: "chatgpt-messenger-8c5d7.appspot.com",
-  
-    messagingSenderId: "946178822070",
-  
-    appId: "1:946178822070:web:72f26b5983273f0a69bb17"
+  apiKey: "AIzaSyCxh4nV_wRqQ3RHiDEGPAKU8EPiR0U1mMk",
+
+  authDomain: "chatgpt-16d23.firebaseapp.com",
+
+  projectId: "chatgpt-16d23",
+
+  storageBucket: "chatgpt-16d23.appspot.com",
+
+  messagingSenderId: "336455597957",
+
+  appId: "1:336455597957:web:55413f52275fa63eaa0eec"
   
   };
   
@@ -26,4 +26,5 @@ console.log(getApps())
 const app = getApps().length ? getApp() : initializeApp(firebaseConfig)
 const db = getFirestore(app)
 
-export {db}
+const auth = getAuth(app)
+export {db, auth}
