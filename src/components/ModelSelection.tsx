@@ -2,14 +2,15 @@
 import useSWR from "swr"
 import Select from "react-select"
 
-const fetchModels = () => {
-    return fetch('/api/getEngines').then(res => res.json())
+const fetchModels = async() => {
+    return await fetch('/api/getEngines').then(res => res.json())
 }
 function ModelSelection() {
     const { data: models, isLoading } = useSWR("models", fetchModels)
     const { data: model, mutate: setModel } = useSWR('model', {
         fallbackData: "text-davinvi-003"
     });
+  // const [model, setModel] = useState("text-davinvi-003")
     return (
         <div className="mt-2">
             <Select className="mt-2"

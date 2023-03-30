@@ -18,6 +18,7 @@ function LoginForm() {
       await signIn("credentials", {
         email: userInfo.email,
         password: userInfo.password,
+        redirect:true,
         callbackUrl: "/"
       })
     }
