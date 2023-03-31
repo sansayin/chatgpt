@@ -2,11 +2,13 @@
 import { signIn, signOut } from "next-auth/react"
 import { FormEventHandler, useState } from "react";
 import { FaDiscord, FaGoogle } from "react-icons/fa"
+import { useRouter } from "next/navigation";
+
 function LoginForm() {
   const [userInfo, setUserInfo] = useState({ email: "aaa@bbb.com", password: "ccccccc", password1: "" });
   const [regist, setRegist] = useState(false)
   const [message, setMessage] = useState("")
-
+  const router = useRouter()
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
     if (regist) {
@@ -15,12 +17,16 @@ function LoginForm() {
       }
       alert("TBD") 
     } else {
-      await signIn("credentials", {
+      const result = await signIn("credentials", {
         email: userInfo.email,
         password: userInfo.password,
-        redirect:true,
-        callbackUrl: "/"
+        redirect:false,
       })
+      if(result?.status==200){
+        window.location.replace("/")
+      }else{
+        setMessage("Wrong user/pass")
+      }
     }
   }
   return (
@@ -100,7 +106,7 @@ function LoginForm() {
               {" "}
               还没有账号?{" "}
               <a
-                href="#" onClick={() => { setRegist(true) }}
+                href="#" onClick={() => { setRegist(true) ;setMessage("") }}
                 className="font-medium text-white hover:underline"
               >
                 注册

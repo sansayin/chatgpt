@@ -6,12 +6,13 @@ import {
   type DefaultSession,
 } from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
+import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials";
 import { env } from "~/env.mjs";
 import { cert } from "firebase-admin/app"
 import { auth } from "../firebase"
 //import { adminDb as firedb } from "~/firebase";
-import { signInWithEmailAndPassword, sendEmailVerification } from 'firebase/auth'
+import { signInWithEmailAndPassword, sendEmailVerification, GoogleAuthProvider } from 'firebase/auth'
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
  * object and keep type safety.
@@ -68,16 +69,18 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       authorize: async (credentials, req) => {
-        signInWithEmailAndPassword(auth, credentials?.email!, credentials?.password!)
-          .then(() => {
-            console.log(auth.currentUser?.providerData)
-            if (!auth.currentUser?.emailVerified) {
-              console.log("User Email Not Verified!")
-            }
-          })
-          .catch((err) => {
-            console.log(err)
-          })
+        const res = await signInWithEmailAndPassword(auth, credentials?.email!, credentials?.password!)
+          // .then(() => {
+          //   console.log(auth.currentUser?.providerData)
+          //   if (!auth.currentUser?.emailVerified) {
+          //     console.log("User Email Not Verified!")
+          //     return null
+          //   }
+          // })
+          // .catch((err) => {
+          //   console.log(err)
+          //   return null
+          // })
         if (auth.currentUser) {
           return {
             id: auth.currentUser?.uid,
@@ -92,6 +95,12 @@ export const authOptions: NextAuthOptions = {
       clientId: env.DISCORD_CLIENT_ID,
       clientSecret: env.DISCORD_CLIENT_SECRET,
     }),
+    GoogleProvider(
+      {
+       clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
+      }
+    ),
     /**
      * ...add more providers here.
      *
